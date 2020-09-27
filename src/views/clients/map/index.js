@@ -6,10 +6,13 @@ import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import Map from './Map'
+import Image from "material-ui-image";
+import Map from "./Map";
+import AutoRotatingCarouselModal from "../../../components/AutoRotatingCarouselModal";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import "./style.scss";
 
-const drawerWidth = 240;
-
+const drawerWidth = 400;
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -28,7 +31,6 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
-    justifyContent: "flex-end",
   },
   content: {
     flexGrow: 1,
@@ -53,9 +55,11 @@ export default function PersistentDrawerLeft() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [data, setData] = React.useState({});
+  const [openCarousel, setOpenCarousel] = React.useState(false);
 
-  const handleDrawerOpen = (e) => {
-    console.log('handleDrawerOpen', e);
+  const handleDrawerOpen = (data) => {
+    setData(data);
     setOpen(true);
   };
 
@@ -63,6 +67,7 @@ export default function PersistentDrawerLeft() {
     setOpen(false);
   };
 
+  const matches = useMediaQuery("(max-width:600px)");
   return (
     <div className={classes.root}>
       <Drawer
@@ -75,7 +80,8 @@ export default function PersistentDrawerLeft() {
         }}
       >
         <div className={classes.drawerHeader}>
-          <IconButton onClick={handleDrawerClose}>
+          <div className="header-title">ダナンの浸水地域</div>
+          <IconButton onClick={handleDrawerClose} className="header-icon">
             {theme.direction === "ltr" ? (
               <ChevronLeftIcon />
             ) : (
@@ -84,7 +90,14 @@ export default function PersistentDrawerLeft() {
           </IconButton>
         </div>
         <Divider />
-        <div>dfkjdslfk</div>
+        {data.images && data.images[0] ? (
+          <Image
+            src={data.images[0].image}
+            aspectRatio={16 / 9}
+            onClick={() => setOpenCarousel(true)}
+          />
+        ) : null}
+        <div className="name">{data ? data.name : ""}</div>
         <Divider />
       </Drawer>
       <main
@@ -94,6 +107,12 @@ export default function PersistentDrawerLeft() {
       >
         <Map openDrawer={handleDrawerOpen} />
       </main>
+      <AutoRotatingCarouselModal
+        handleOpen={openCarousel}
+        setHandleOpen={setOpenCarousel}
+        data={data.images}
+        isMobile={matches}
+      />
     </div>
   );
 }

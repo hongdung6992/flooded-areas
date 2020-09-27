@@ -25,6 +25,7 @@ export default class GoogleMap extends Component {
       coordinates: props.coordinates,
       height: props.height,
       googleApiLoaded: false,
+      data: props.data
     };
     this.mapRef = React.createRef();
   }

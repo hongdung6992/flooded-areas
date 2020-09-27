@@ -5,7 +5,7 @@ import Polyline from "../Polyline";
 import toPoints from "../../functions/toPoints";
 
 class Svg extends Component {
-  drawChildCoords = ({ bounds, coords, options, zoom }) => {
+  drawChildCoords = ({ bounds, coords, options, zoom, data }) => {
     const ptCorner = toPoints(bounds[0], bounds[1], zoom);
     if (coords[0].hasOwnProperty("lat") && coords[0].hasOwnProperty("lng")) {
       return (
@@ -16,6 +16,7 @@ class Svg extends Component {
           zoom={zoom}
           options={options}
           openDrawer={this.props.openDrawer}
+          data={data}
         />
       );
     }
@@ -35,7 +36,7 @@ class Svg extends Component {
           );
         } else {
           child.push(
-            this.drawChildCoords({ bounds, coords: coords[i], options, zoom })
+            this.drawChildCoords({ bounds, coords: coords[i], options, zoom, data: data[i] })
           );
         }
       }
@@ -44,7 +45,7 @@ class Svg extends Component {
   };
 
   render() {
-    let { bounds, coordinates, height, width, zoom } = this.props;
+    let { bounds, coordinates, height, width, zoom, data } = this.props;
     const coords = coordinates.coords;
     if (coords.length === 0) {
       return null;
@@ -56,6 +57,7 @@ class Svg extends Component {
           coords,
           options: coordinates.options,
           zoom,
+          data
         })}
       </svg>
     );

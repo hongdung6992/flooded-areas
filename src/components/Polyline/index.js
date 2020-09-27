@@ -4,7 +4,7 @@ import toPoints from "../../functions/toPoints";
 
 class Polyline extends Component {
   render() {
-    let { bounds, coords, options, ptCorner, zoom } = this.props;
+    let { bounds, coords, options, ptCorner, zoom, data } = this.props;
     ptCorner = ptCorner || toPoints(bounds[0], bounds[1], zoom);
     const points = [];
     for (let i = 0; i < coords.length; i++) {
@@ -20,7 +20,7 @@ class Polyline extends Component {
       <polyline
         points={points.join(" ")}
         {...options}
-        onClick={() => this.props.openDrawer(this.props)}
+        onClick={() => this.props.openDrawer(data)}
       ></polyline>
     );
   }
