@@ -1,8 +1,8 @@
 import React from "react";
 import GoogleMap from "../../../components/GoogleMap";
-import { floodedAreas } from "../../../data";
 
 class Map extends React.Component {
+  
   render() {
     const defaultOptions = {
       strokeWidth: 1,
@@ -13,11 +13,12 @@ class Map extends React.Component {
       onMouseEnter: (e) => {},
       onMouseLeave: (e) => {},
     };
-
     const coords = [];
-    floodedAreas.forEach((element) => {
+    this.props.data.forEach((element) => {
       coords.push(element.coords);
     });
+
+    console.log(this.props);
 
     return (
       <GoogleMap
@@ -25,7 +26,7 @@ class Map extends React.Component {
         zoom={11}
         center={[24.886, -70.268]}
         openDrawer={this.props.openDrawer}
-        data={floodedAreas}
+        data={this.props.data}
       />
     );
   }

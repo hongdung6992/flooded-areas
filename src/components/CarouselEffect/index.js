@@ -22,10 +22,12 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.default,
   },
   img: {
-    height: 420,
+    height: 544,
     display: 'block',
     overflow: 'hidden',
     width: '100%',
+    objectFit: 'cover',
+    objectPosition: 'center',
   },
 }));
 

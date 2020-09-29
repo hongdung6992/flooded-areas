@@ -1,6 +1,4 @@
-.makeStyles-drawerHeader-4 {
-  background-color: #1976D2;
-  .header-title {
+.header-title {
     width: 100%;
     text-align: center;
     color: #fff;
@@ -9,8 +7,12 @@
   button.header-icon {
     position: absolute;
     right: 0;
+    color: #fff;
   }
-}
+
+  .modal-carousel {
+    height:200px
+  }
 
 div.name {
   padding: 10px 0 10px 10px;
