@@ -17,11 +17,11 @@ class Polyline extends Component {
     }
 
     return (
-      <polyline
+      <polygon
         points={points.join(" ")}
         {...options}
         onClick={() => this.props.openDrawer(data)}
-      ></polyline>
+      ></polygon>
     );
   }
 }

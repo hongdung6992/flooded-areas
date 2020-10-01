@@ -6,25 +6,33 @@ import AutoRotatingCarouselModal from "../../../components/AutoRotatingCarouselM
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import "./style.scss";
 import { List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
 import { floodedAreas } from "../../../data";
+import PentagonIcon from "../../../components/PentagonIcon";
 
 export default function FloodedAreasOnMap() {
+  const [areas] = useState(floodedAreas);
   const [data, setData] = useState({});
   const [open, setOpen] = useState(false);
   const childRef = useRef();
+  const mapRef = useRef();
   const matches = useMediaQuery("(max-width:600px)");
 
   const callHandleDrawerOpen = (data) => {
     setData(data);
     childRef.current.handleDrawerOpen();
+    mapRef.current.zoomToCenter(data);
   };
 
   return (
     <>
       <PersistentDrawerLeft
-        main={<Map openDrawer={callHandleDrawerOpen} data={floodedAreas} />}
+        main={
+          <Map
+            openDrawer={callHandleDrawerOpen}
+            data={floodedAreas}
+            ref={mapRef}
+          />
+        }
         ref={childRef}
       >
         {data.images && data.images[0] ? (
@@ -34,13 +42,24 @@ export default function FloodedAreasOnMap() {
             onClick={() => setOpen(true)}
           />
         ) : null}
-        <div className="name">{data ? data.name : ""}</div>
-        {!data.length ? (
+        {data && data.name ? (
+          <div className="name">Area: {data.name}</div>
+        ) : null}
+
+        {data && data.description ? (
+          <div className="name">Description: {data.description}</div>
+        ) : null}
+
+        {data.length !== 0 ? (
           <List>
-            {floodedAreas.map((area, index) => (
-              <ListItem button key={index}>
+            {areas.map((area, index) => (
+              <ListItem
+                button
+                key={index}
+                onClick={() => callHandleDrawerOpen(area)}
+              >
                 <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  <PentagonIcon size={30} />
                 </ListItemIcon>
                 <ListItemText primary={area.name} />
               </ListItem>

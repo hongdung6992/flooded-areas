@@ -88,7 +88,7 @@ const PersistentDrawerLeft = forwardRef(({ main, children }, ref) => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Persistent drawer
+            ダナンの浸水地域
           </Typography>
         </Toolbar>
       </AppBar>
