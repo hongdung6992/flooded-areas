@@ -1,15 +1,22 @@
-import React, { PropTypes } from 'react';
+import React, { useState } from "react";
+import { Button, Layout } from "antd";
+import Modal from "./Modal";
 
-const FloodedAreas = props => {
+export default function Floodplain() {
+  const [modalVisible, setModalVisible] = useState(false);
+
   return (
-    <div>
-      
-    </div>
+    <React.Fragment>
+      <Layout style={{ marginTop: "10%", alignItems: "center" }}>
+        <Button
+          type="primary"
+          onClick={() => setModalVisible(true)}
+          style={{ width: 200 }}
+        >
+          Add floodplain
+        </Button>
+        <Modal visible={modalVisible} cancel={() => setModalVisible(false)} />
+      </Layout>
+    </React.Fragment>
   );
-};
-
-FloodedAreas.propTypes = {
-  
-};
-
-export default FloodedAreas;
+}

@@ -2,7 +2,7 @@ export const floodedAreas = [
   {
     id: 1,
     name: "Hồ Thạc Gián",
-    coords: [
+    coordinates: [
       { lat: 16.066112, lng: 108.207722 },
       { lat: 16.066689, lng: 108.210839 },
       { lat: 16.064467, lng: 108.211424 },
@@ -21,7 +21,7 @@ export const floodedAreas = [
   {
     id: 2,
     name: "167 Nguyễn Văn Linh",
-    coords: [
+    coordinates: [
       { lat: 16.06058, lng: 108.212855 },
       { lat: 16.061271, lng: 108.216958 },
       { lat: 16.060357, lng: 108.217128 },
@@ -49,7 +49,7 @@ export const floodedAreas = [
   {
     id: 3,
     name: "Trần Phú - Hoàng Văn Thụ",
-    coords: [
+    coordinates: [
       { lat: 16.061008, lng: 108.222747 },
       { lat: 16.061034, lng: 108.223621 },
       { lat: 16.062971, lng: 108.223652 },
@@ -60,7 +60,7 @@ export const floodedAreas = [
   {
     id: 4,
     name: "Ông Ích Khiêm - Chợ Cồn",
-    coords: [
+    coordinates: [
       { lat: 16.067153, lng: 108.213823 },
       { lat: 16.067316, lng: 108.214515 },
       { lat: 16.07036, lng: 108.213808 },
@@ -72,7 +72,7 @@ export const floodedAreas = [
   {
     id: 5,
     name: "Trần Cao Vân - Ông Ích Khiêm",
-    coords: [
+    coordinates: [
       { lat: 16.073064, lng: 108.210122 },
       { lat: 16.072469, lng: 108.210266 },
       { lat: 16.073258, lng: 108.213372 },
@@ -84,7 +84,7 @@ export const floodedAreas = [
   {
     id: 6,
     name: "An Xuân - Cù Chính Lan",
-    coords: [
+    coordinates: [
       { lat: 16.062221, lng: 108.181762 },
       { lat: 16.063131, lng: 108.182946 },
       { lat: 16.064199, lng: 108.181989 },
@@ -101,7 +101,7 @@ export const floodedAreas = [
   {
     id: 7,
     name: "Bắc Sơn - Yên Thế",
-    coords: [
+    coordinates: [
       { lat: 16.05865, lng: 108.175174 },
       { lat: 16.059083, lng: 108.175971 },
       { lat: 16.051957, lng: 108.178407 },
@@ -113,7 +113,7 @@ export const floodedAreas = [
   {
     id: 8,
     name: "DongDa-LyTuTrong",
-    coords: [
+    coordinates: [
       { lat: 16.076629, lng: 108.215331 },
       { lat: 16.076123, lng: 108.216162 },
       { lat: 16.077196, lng: 108.216936 },
@@ -130,7 +130,7 @@ export const floodedAreas = [
   {
     id: 9,
     name: "TranCaoVan",
-    coords: [
+    coordinates: [
       { lat: 16.068868, lng: 108.183123 },
       { lat: 16.068474, lng: 108.18361 },
       { lat: 16.069345, lng: 108.184468 },
@@ -147,7 +147,7 @@ export const floodedAreas = [
   {
     id: 10,
     name: "HaHuyTap",
-    coords: [
+    coordinates: [
       { lat: 16.064531, lng: 108.191765 },
       { lat: 16.064457, lng: 108.192212 },
       { lat: 16.065479, lng: 108.192279 },

@@ -10,7 +10,7 @@ class Svg extends Component {
     if (coords[0].hasOwnProperty("lat") && coords[0].hasOwnProperty("lng")) {
       return (
         <Polyline
-          key={coords[0].lat + coords[0].lng}
+          key={data.id}
           coords={coords}
           ptCorner={ptCorner}
           zoom={zoom}
@@ -36,7 +36,13 @@ class Svg extends Component {
           );
         } else {
           child.push(
-            this.drawChildCoords({ bounds, coords: coords[i], options, zoom, data: data[i] })
+            this.drawChildCoords({
+              bounds,
+              coords: coords[i],
+              options,
+              zoom,
+              data: data[i],
+            })
           );
         }
       }
@@ -57,7 +63,7 @@ class Svg extends Component {
           coords,
           options: coordinates.options,
           zoom,
-          data
+          data,
         })}
       </svg>
     );

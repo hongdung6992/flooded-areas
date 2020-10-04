@@ -15,13 +15,17 @@ const Map = forwardRef(({ data, openDrawer }, ref) => {
   const mapRef = useRef();
 
   const coords = [];
-  data.forEach((element) => {
-    coords.push(element.coords);
+  data.forEach((item) => {
+    const coordinates = item.coordinates.map((coordinate) => {
+      const { lat, lng } = coordinate;
+      return { lat, lng };
+    });
+    coords.push(coordinates);
   });
 
   useImperativeHandle(ref, () => ({
-    zoomToCenter(area) {
-      mapRef.current.zoomToCenter(area);
+    zoomToCenter(floodplain) {
+      mapRef.current.zoomToCenter(floodplain);
     },
   }));
 

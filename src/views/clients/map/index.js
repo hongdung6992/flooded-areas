@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import PersistentDrawerLeft from "../../../components/PersistentDrawerLeft";
 import Image from "material-ui-image";
 import Map from "./Map";
@@ -6,11 +6,11 @@ import AutoRotatingCarouselModal from "../../../components/AutoRotatingCarouselM
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import "./style.scss";
 import { List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
-import { floodedAreas } from "../../../data";
 import PentagonIcon from "../../../components/PentagonIcon";
+import { floodplainApi } from "../../../api";
 
 export default function FloodedAreasOnMap() {
-  const [areas] = useState(floodedAreas);
+  const [floodplains, setFloodplains] = useState([]);
   const [data, setData] = useState({});
   const [open, setOpen] = useState(false);
   const childRef = useRef();
@@ -23,13 +23,24 @@ export default function FloodedAreasOnMap() {
     mapRef.current.zoomToCenter(data);
   };
 
+  useEffect(() => {
+    floodplainApi
+      .getAll()
+      .then(({ data }) => {
+        setFloodplains(data);
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
+  }, []);
+
   return (
     <>
       <PersistentDrawerLeft
         main={
           <Map
             openDrawer={callHandleDrawerOpen}
-            data={floodedAreas}
+            data={floodplains}
             ref={mapRef}
           />
         }
@@ -37,13 +48,13 @@ export default function FloodedAreasOnMap() {
       >
         {data.images && data.images[0] ? (
           <Image
-            src={data.images[0].image}
+            src={data.images[0].path}
             aspectRatio={16 / 9}
             onClick={() => setOpen(true)}
           />
         ) : null}
         {data && data.name ? (
-          <div className="name">Area: {data.name}</div>
+          <div className="name">Name: {data.name}</div>
         ) : null}
 
         {data && data.description ? (
@@ -52,16 +63,16 @@ export default function FloodedAreasOnMap() {
 
         {data.length !== 0 ? (
           <List>
-            {areas.map((area, index) => (
+            {floodplains.map((floodplain, index) => (
               <ListItem
                 button
                 key={index}
-                onClick={() => callHandleDrawerOpen(area)}
+                onClick={() => callHandleDrawerOpen(floodplain)}
               >
                 <ListItemIcon>
                   <PentagonIcon size={30} />
                 </ListItemIcon>
-                <ListItemText primary={area.name} />
+                <ListItemText primary={floodplain.name} />
               </ListItem>
             ))}
           </List>

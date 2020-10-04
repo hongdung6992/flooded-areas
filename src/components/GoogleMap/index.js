@@ -14,10 +14,8 @@ const GoogleMap = forwardRef((props, ref) => {
   const [bounds, setBounds] = useState([]);
   const [zoom, setZoom] = useState(props.zoom);
   const [center, setCenter] = useState(props.center);
-  const [coordinates] = useState(props.coordinates);
   const [height] = useState(props.height);
   const [googleApiLoaded, setGoogleApiLoaded] = useState(false);
-  const [data] = useState(props.data);
   const [maps, setMaps] = useState({});
   const mapRef = useRef();
 
@@ -28,13 +26,13 @@ const GoogleMap = forwardRef((props, ref) => {
         <Svg
           lat={bounds[0]}
           lng={bounds[1]}
-          coordinates={coordinates}
+          coordinates={props.coordinates}
           bounds={bounds}
           zoom={zoom}
           height={ref ? ref.offsetHeight : 0}
           width={ref ? ref.offsetWidth : 0}
           openDrawer={props.openDrawer}
-          data={data}
+          data={props.data}
         />
       );
   };
@@ -70,19 +68,22 @@ const GoogleMap = forwardRef((props, ref) => {
         }
       }
     }
-    extendCoordsBounds(coordinates.coords, center);
+    extendCoordsBounds(props.coordinates.coords, center);
 
     map.fitBounds(bounds);
     map.setZoom(zoom);
   };
 
   useImperativeHandle(ref, () => ({
-    zoomToCenter(area) {
+    zoomToCenter(floodplain) {
       const bounds = new maps.LatLngBounds();
-      area.coords.forEach((coordinate) => {
-        const arr = Object.values(coordinate);
-        bounds.extend(new maps.LatLng(arr[0], arr[1]));
+      const coordinate = floodplain.coordinates.map((coordinate) => {
+        const { lat, lng } = coordinate;
+        return { lat, lng };
       });
+      const arr = Object.values(coordinate);
+      bounds.extend(new maps.LatLng(arr[0], arr[1]));
+
       setZoom(17);
       setCenter([bounds.getCenter().lat(), bounds.getCenter().lng()]);
     },
